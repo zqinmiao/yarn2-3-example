@@ -1,0 +1,21 @@
+{
+  "name": "yarn2-example",
+  "packageManager": "yarn@3.1.1",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "start": "node packages/package-b/index.js"
+  },
+  "devDependencies": {
+    "depcheck": "^1.4.2",
+    "eslint": "^7.32.0",
+    "lerna": "^4.0.0"
+  },
+  "dependenciesMeta": {
+    "lodash@4.17.21": {
+      "unplugged": false
+    }
+  }
+}
