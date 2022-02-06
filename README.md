@@ -1,4 +1,8 @@
-# yarn 2.x/3.x 使用 探索
+# Yarn 2.x/3.x 使用
+
+[与 js-coding-rover/docs/yarn 相呼应](https://github.com/zqinmiao/js-coding-rover/docs/yarn)
+
+[JavaScript 包管理器简史](https://github.com/zqinmiao/js-coding-rover/docs/yarn/javascript-package-manager-history/index.md)
 
 [yarn1 升级到 v2/v3](./docs/v1-update-v2-v3.md)
 
@@ -116,9 +120,11 @@ $ yarn plugin import workspace-tools
 - [yarn workspace focus](https://yarnpkg.com/cli/workspaces/focus)
 - [yarn workspaces foreach](https://yarnpkg.com/cli/workspaces/foreach)
 
-## 调试本地`node_modules`依赖
+## 无法访问`node_modules`
 
-在开发过程中我们有时会直接修改 `node_modules` 目录下的依赖来调试。但在 PnP 模式下，由于依赖都指向了全局缓存，我们不再可以直接修改这些依赖。
+> [ZipFS - a zip file system](https://marketplace.visualstudio.com/items?itemName=arcanis.vscode-zipfs)：借助这个 VSCode 插件可以直接打开缓存目录中的`.zip`文件，查看包的源码
+
+在开发过程中我们有时会直接修改 `node_modules` 目录下的依赖来调试。但在 PnP 模式下，由于依赖都指向了缓存文件，我们不再可以直接访问这些依赖。
 
 针对这种场景，`Yarn` 提供了 `yarn unplug packageName` 来将某个指定依赖拷贝到项目中的 `.yarn/unplugged` 目录下。之后 `.pnp.js` 中的 resolver 就会自动加载这个 unplug 的版本。
 
@@ -148,7 +154,13 @@ $ yarn plugin import workspace-tools
 }
 ```
 
-## 忘记依赖
+## 忘记依赖（幻影依赖（Phantom dependencies））
+
+> 开启 pnp 模式（`nodeLinker: pnp`），无论是否为严格模式，则会解决幻影依赖的问题。
+>
+> 如果使用yarn@3.1.0及以上版本，甚至可以直接设置`nodeLinker: pnpm`，使用 pnpm 风格的链接器。([pnpm 关于解决幻影依赖的实践](https://github.com/zqinmiao/pnpm-example/blob/master/docs/phantom-dependencies.md))
+
+### 以下为存在`幻影依赖`的情况及之前的解决方法（废弃 ⚠️）
 
 由于将`node_modules`提升到了根目录，我在根目录安装了`eslint`:
 
@@ -214,7 +226,7 @@ module.exports = {
 };
 ```
 
-## pnp 严格模式（strict）
+## pnp 严格模式（pnpMode: strict）
 
 [PnP loose mode](https://yarnpkg.com/features/pnp#pnp-loose-mode)
 
@@ -224,9 +236,23 @@ pnp 模式是严格模式，如果开启了严格模式，我们在启动工程�
 but it isn't declared in its dependencies; this makes the require call ambiguous and unsound.
 ```
 
-这是因为`pnp`的严格模式导致的。现在依然有好多 npm 包并未严格遵循规范，所以我们最好采取`loose`模式
+这是因为`pnp`的严格模式导致的。现在依然有好多 npm 包并未严格遵循规范，我们可以采取`loose`模式。
 
-## yarn2.x 与 lerna 结合
+### packageExtensions
+
+如果不采用`loose`模式。那么我们可以在`.yarnrc.yml`，通过`packageExtensions`对缺少依赖的包进行扩展缺少的依赖，如下：
+
+```yml
+packageExtensions:
+  postcss-loader@4.x:
+    dependencies:
+      postcss-preset-env: "6.x"
+  styled-components@5.x:
+    dependencies:
+      react-is: "16.x"
+```
+
+## yarn2.x 与 lerna 结合（不推荐）
 
 [yarn-workspaces-vs-lerna](https://yarnpkg.com/features/workspaces#yarn-workspaces-vs-lerna)
 
@@ -287,3 +313,13 @@ lerna ERR! Error: Unsupported URL Type "workspace:": workspace:*
 ```
 $ yarn workspace package-b add package-a@^1.0.2
 ```
+
+## eslint
+
+eslint 不生效的原因
+
+[[Feature] Extracted config files](https://github.com/yarnpkg/berry/issues/2509)
+
+- 确保相关 plugin 和 parser 已安装
+- `extends: ['eslint-v7']` 这种形式会不生效，要使用`extends: [require.resolve('eslint-v7')]`
+- 时常 reload vscode

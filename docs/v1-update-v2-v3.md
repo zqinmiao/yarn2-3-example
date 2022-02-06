@@ -114,8 +114,7 @@ yarn-3.1.1.cjs
 
 [相关 issue](https://github.com/yarnpkg/yarn/issues/8460)
 
-
-## 项目下自己的yarn releases版本被全局的yarn覆盖
+## 项目下自己的 yarn releases 版本被全局的 yarn 覆盖
 
 在项目下执行`yarn -v`，输出`3.0.0`。即使`.yarnrc.yml`中的设置为：`yarnPath: .yarn/releases/yarn-3.1.1.cjs`
 

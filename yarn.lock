@@ -152,6 +152,7 @@ __metadata:
   resolution: "@buibis/package-a@workspace:packages/package-a"
   dependencies:
     lodash: ^4.17.21
+    node-emoji: ^1.11.0
   languageName: unknown
   linkType: soft
 
@@ -160,7 +161,6 @@ __metadata:
   resolution: "@buibis/package-b@workspace:packages/package-b"
   dependencies:
     "@buibis/package-a": ^1.0.1
-    lodash: ^4.17.21
   languageName: unknown
   linkType: soft
 
@@ -169,7 +169,6 @@ __metadata:
   resolution: "@buibis/package-c@workspace:packages/package-c"
   dependencies:
     "@buibis/package-b": ^1.0.0
-    eslint: ^7.32.0
   languageName: unknown
   linkType: soft
 
@@ -4513,6 +4512,15 @@ fsevents@~2.3.2:
   version: 2.6.2
   resolution: "neo-async@npm:2.6.2"
   checksum: deac9f8d00eda7b2e5cd1b2549e26e10a0faa70adaa6fdadca701cc55f49ee9018e427f424bac0c790b7c7e2d3068db97f3093f1093975f2acb8f8818b936ed9
+  languageName: node
+  linkType: hard
+
+"node-emoji@npm:^1.11.0":
+  version: 1.11.0
+  resolution: "node-emoji@npm:1.11.0"
+  dependencies:
+    lodash: ^4.17.21
+  checksum: e8c856c04a1645062112a72e59a98b203505ed5111ff84a3a5f40611afa229b578c7d50f1e6a7f17aa62baeea4a640d2e2f61f63afc05423aa267af10977fb2b
   languageName: node
   linkType: hard
 

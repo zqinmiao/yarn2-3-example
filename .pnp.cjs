@@ -217,7 +217,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./packages/package-a/",
           "packageDependencies": [
             ["@buibis/package-a", "workspace:packages/package-a"],
-            ["lodash", "npm:4.17.21"]
+            ["lodash", "npm:4.17.21"],
+            ["node-emoji", "npm:1.11.0"]
           ],
           "linkType": "SOFT",
         }]
@@ -227,8 +228,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./packages/package-b/",
           "packageDependencies": [
             ["@buibis/package-b", "workspace:packages/package-b"],
-            ["@buibis/package-a", "workspace:packages/package-a"],
-            ["lodash", "npm:4.17.21"]
+            ["@buibis/package-a", "workspace:packages/package-a"]
           ],
           "linkType": "SOFT",
         }]
@@ -238,8 +238,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./packages/package-c/",
           "packageDependencies": [
             ["@buibis/package-c", "workspace:packages/package-c"],
-            ["@buibis/package-b", "workspace:packages/package-b"],
-            ["eslint", "npm:7.32.0"]
+            ["@buibis/package-b", "workspace:packages/package-b"]
           ],
           "linkType": "SOFT",
         }]
@@ -5106,6 +5105,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/neo-async-npm-2.6.2-75d6902586-deac9f8d00.zip/node_modules/neo-async/",
           "packageDependencies": [
             ["neo-async", "npm:2.6.2"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["node-emoji", [
+        ["npm:1.11.0", {
+          "packageLocation": "./.yarn/cache/node-emoji-npm-1.11.0-dd2f09050c-e8c856c04a.zip/node_modules/node-emoji/",
+          "packageDependencies": [
+            ["node-emoji", "npm:1.11.0"],
+            ["lodash", "npm:4.17.21"]
           ],
           "linkType": "HARD",
         }]
