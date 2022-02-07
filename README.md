@@ -71,6 +71,13 @@ $ yarn
 ├── install-state.gz
 ```
 
+对于 monorepo 仓库，新建并初始化 packages 子包：
+
+```
+$ cd packages/sub-package-name
+$ yarn init
+```
+
 ## 管理各自项目中的 yarn 版本
 
 执行`yarn set version latest`，在`.yarn`文件夹下生成`releases`文件夹
