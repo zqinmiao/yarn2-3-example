@@ -2,7 +2,7 @@
 
 [与 js-coding-rover/docs/yarn 相呼应](https://github.com/zqinmiao/js-coding-rover/docs/yarn)
 
-[JavaScript 包管理器简史](https://github.com/zqinmiao/js-coding-rover/docs/yarn/javascript-package-manager-history/index.md)
+[JavaScript 包管理器简史](https://github.com/zqinmiao/js-coding-rover/docs/yarn/javascript-package-manager-history/)
 
 [yarn1 升级到 v2/v3](./docs/v1-update-v2-v3.md)
 
@@ -325,8 +325,27 @@ $ yarn workspace package-b add package-a@^1.0.2
 
 eslint 不生效的原因
 
-[[Feature] Extracted config files](https://github.com/yarnpkg/berry/issues/2509)
-
 - 确保相关 plugin 和 parser 已安装
-- `extends: ['eslint-v7']` 这种形式会不生效，要使用`extends: [require.resolve('eslint-v7')]`
+- 在 yarn pnp 模式下
+
+  - `extends: ['eslint-v7']` 这种形式会不生效，要使用`extends: [require.resolve('eslint-v7')]`，相关 issue：[[Feature] Extracted config files](https://github.com/yarnpkg/berry/issues/2509)
+  - 所有被 `extends` 的配置（config）都要在配置文件顶部导入`@rushstack/eslint-patch/modern-module-resolution`，如下：
+
+    ```js
+    module.exports = {
+      extends: [
+        require.resolve(`eslint-v7/react`),
+        require.resolve(`eslint-v7/typescript`),
+      ],
+    };
+    ```
+
+    则`eslint-v7/react`和`eslint-v7/typescript`的配置顶部都要导入（记住！都要导入！）：
+
+    ```js
+    require("@rushstack/eslint-patch/modern-module-resolution");
+    ```
+
+    [相关 issue](https://github.com/eslint/eslint/issues/3458)
+
 - 时常 reload vscode
