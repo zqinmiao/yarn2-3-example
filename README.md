@@ -1,8 +1,8 @@
 # Yarn 2.x/3.x 使用
 
-[与 js-coding-rover/docs/yarn 相呼应](https://github.com/zqinmiao/js-coding-rover/docs/yarn)
+[与 js-coding-rover/docs/yarn 相呼应](https://github.com/zqinmiao/js-coding-rover/tree/master/docs/yarn)
 
-[JavaScript 包管理器简史](https://github.com/zqinmiao/js-coding-rover/docs/yarn/javascript-package-manager-history/)
+[JavaScript 包管理器简史](https://github.com/zqinmiao/js-coding-rover/tree/master/docs/yarn/javascript-package-manager-history/)
 
 [yarn1 升级到 v2/v3](./docs/v1-update-v2-v3.md)
 
