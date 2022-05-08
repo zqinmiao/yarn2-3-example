@@ -243,7 +243,9 @@ pnp 模式是严格模式，如果开启了严格模式，我们在启动工程�
 but it isn't declared in its dependencies; this makes the require call ambiguous and unsound.
 ```
 
-这是因为`pnp`的严格模式导致的。现在依然有好多 npm 包并未严格遵循规范，我们可以采取`loose`模式。
+这是因为`pnp`的严格模式导致的。比如：`A`包内部有用到`B`包中的方法，如果`B`包没有在`A`包的`dependencies`依赖中，那么我们的项目在使用`A`包时，即使我们的项目有安装`B`包，在严格模式下依然会报以上错误。
+
+现在依然有好多 npm 包并未严格遵循规范，我们可以采取`loose`模式。
 
 ### packageExtensions
 
